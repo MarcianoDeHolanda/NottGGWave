@@ -17,14 +17,14 @@ ggwave:
   # Formatos de mensaje GG que envían los jugadores (se rotan cíclicamente)
   # Variables disponibles: %player_name%
   gg-formats:
-    - "<gradient:red:yellow><b>%player_name% » GG!</gradient>"
-    - "<gradient:blue:green><b>%player_name% » GG!</gradient>"
-    - "<gradient:purple:pink><b>%player_name% » GG!</gradient>"
-    - "<gradient:orange:red><b>%player_name% » GG!</gradient>"
-    - "<gradient:cyan:blue><b>%player_name% » GG!</gradient>"
-    - "<gradient:yellow:orange><b>%player_name% » GG!</gradient>"
-    - "<gradient:green:blue><b>%player_name% » GG!</gradient>"
-    - "<gradient:pink:purple><b>%player_name% » GG!</gradient>"
+    - "<gradient:#FF4E4E:blue><b>%player_name% » <u><i>GG!!</gradient>"
+    - "<gradient:#FFA234:dark_purple><b>%player_name% » <u><i>GGG!</gradient>"
+    - "<gradient:#FFF962:light_purple><b>%player_name% » <u><i>GG!!</gradient>"
+    - "<gradient:#6DFF48:aqua><b>%player_name% » <u><i>GGG!</gradient>"
+    - "<gradient:#13FFF1:green><b>%player_name% » <u><i>GG!!</gradient>"
+    - "<gradient:#FF65D3:yellow><b>%player_name% » <u><i>GGG!</gradient>"
+    - "<gradient:#D250FF:gold><b>%player_name% » <u><i>GG!!</gradient>"
+    - "<gradient:#3C4FFF:red><b>%player_name% » <u><i>GGG!</gradient>"
   
   # Efectos opcionales cuando un jugador participa por primera vez
   effects:
@@ -44,7 +44,7 @@ ggwave:
     particle-count: 10
     
     # Mensaje personalizado para el jugador (dejar vacío para desactivar)
-    player-message: "<gold>¡Gracias por participar en la GG Wave!"
+    player-message: ""
 
 # Configuración de recompensas (opcional - expandible)
 rewards:

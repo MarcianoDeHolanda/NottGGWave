@@ -200,9 +200,11 @@ public class GGWaveManager {
         int index = getNextFormatIndex();
         Component template = precomputedGGFormats.get(index % precomputedGGFormats.size());
         
-        // Use replaceText to maintain gradient formatting
-        return template.replaceText(builder -> 
-            builder.matchLiteral("%player_name%").replacement(playerName));
+        // Convert to string and replace, then deserialize with actual player name
+        String templateString = plugin.getMiniMessage().serialize(template);
+        String finalString = templateString.replace("%player_name%", playerName);
+        
+        return plugin.getMiniMessage().deserialize(finalString);
     }
 
     public void reloadMessages() {
