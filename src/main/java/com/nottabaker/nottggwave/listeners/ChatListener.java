@@ -21,6 +21,10 @@ public class ChatListener implements Listener {
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerChat(AsyncPlayerChatEvent event) {
+        // Note: AsyncPlayerChatEvent is deprecated in Paper 1.20.4, but PlayerChatEvent
+        // is also deprecated. We're using AsyncPlayerChatEvent as it's the most appropriate
+        // choice until Paper introduces a new chat event system.
+        
         if (!ggWaveManager.isWaveActive()) {
             return;
         }

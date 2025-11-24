@@ -7,6 +7,10 @@ group = 'com.nottabaker'
 version = '1.0.0'
 description = 'Plugin para gestionar GG Waves con recompensas personalizables'
 
+tasks.withType(JavaCompile) {
+    options.compilerArgs += ['-Xlint:deprecation']
+}
+
 java {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
