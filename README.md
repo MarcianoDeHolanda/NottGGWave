@@ -127,6 +127,14 @@ El plugin sigue las mejores prácticas:
 
 ---
 
+## 🙏 Agradecimientos
+
+Este plugin fue inspirado por **DrakoWave** - un sistema de gestión de GG Waves. NottGGWave es una reescritura completa con características mejoradas, APIs modernas y funcionalidad adicional mientras mantiene el concepto central de GG Waves comunitarias.
+
+Agradecimientos especiales al equipo de **Adventure API** por crear un sistema de componentes de texto tan hermoso y poderoso que hace posible el formateo de gradientes y MiniMessage. ¡La Adventure API es lo que da vida a esos increíbles gradientes de colores! 🌈
+
+---
+
 ## 🌐 English Version
 
 ---
