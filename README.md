@@ -1,17 +1,17 @@
-# NottGGWave
+# NottGGWave v1.0.1
 
 Plugin de Minecraft para Paper/Spigot 1.20.4 que gestiona GG Waves con recompensas personalizables y efectos visuales dinámicos.
 
 ## 🌟 Características
 
 - **🎮 Comandos simples**: `/nottggwave start` y `/nottggwave reload`
-- **⏱️ Duración configurable**: Define cuánto tiempo dura la wave
-- **🌈 Formatos GG rotativos**: 8 gradientes de colores que rotan cíclicamente
-- **💬 Mensajes personalizados**: Usa MiniMessage para colores y formatos avanzados
-- **🔄 Participación ilimitada**: Los jugadores pueden escribir GG múltiples veces
-- **🎁 Recompensa única**: Solo la primera participación da recompensas
+- **🌈 Formatos GG rotativos**: 8 gradientes de color espectaculares que rotan automáticamente
+- **⏱️ Duración configurable**: Establece cuánto dura la wave
 - **✨ Efectos opcionales**: Sonidos, partículas y recompensas personalizables
-- **🔧 Compatible**: Funciona con Java 17+ y Minecraft 1.20.4
+- **🔄 Participación ilimitada**: Los jugadores pueden escribir GG múltiples veces
+- **🎁 Recompensas únicas**: Solo la primera participación da recompensas
+- **⚡ Optimizado para rendimiento**: Mensajes precomputados para mejor desempeño
+- **🎨 Gradientes personalizados**: Soporte para colores hex y formato enriquecido
 
 ---
 

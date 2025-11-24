@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'com.nottabaker'
-version = '1.0.0'
+version = '1.0.1'
 description = 'Plugin para gestionar GG Waves con recompensas personalizables'
 
 tasks.withType(JavaCompile) {
