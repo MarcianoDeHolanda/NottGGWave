@@ -270,6 +270,8 @@ Created by **nottabaker**
 
 This plugin was inspired by **DrakoWave** - a GG Wave management system. NottGGWave is a complete rewrite with enhanced features, modern APIs, and additional functionality while maintaining the core concept of community GG Waves.
 
+Special thanks to the **Adventure API** team for creating such a beautiful and powerful text component system that makes gradient formatting and MiniMessage possible. The Adventure API is what brings those stunning color gradients to life! 🌈
+
 ---
 
 ## 📄 License
