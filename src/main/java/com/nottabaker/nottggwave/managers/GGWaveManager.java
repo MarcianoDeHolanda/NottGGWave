@@ -27,7 +27,7 @@ public class GGWaveManager {
     // Precomputed messages for optimization
     private Component startMessage;
     private Component endMessage;
-    private List<Component> precomputedGGFormats;
+    private List<String> precomputedGGFormatStrings;
 
     public GGWaveManager(NottGGWave plugin) {
         this.plugin = plugin;
@@ -53,11 +53,10 @@ public class GGWaveManager {
             ggFormats = Arrays.asList("<gradient:red:yellow><b>%player_name% » GG!</gradient>");
         }
         
-        this.precomputedGGFormats = new ArrayList<>();
+        this.precomputedGGFormatStrings = new ArrayList<>();
         for (String format : ggFormats) {
-            // Create template with placeholder
-            String template = format.replace("%player_name%", "%player_name%");
-            this.precomputedGGFormats.add(plugin.getMiniMessage().deserialize(template));
+            // Store the original format strings with placeholder
+            this.precomputedGGFormatStrings.add(format);
         }
     }
 
@@ -193,19 +192,14 @@ public class GGWaveManager {
     }
 
     public Component getOptimizedGGMessage(String playerName) {
-        if (precomputedGGFormats.isEmpty()) {
+        if (precomputedGGFormatStrings.isEmpty()) {
             return Component.text(playerName + " » GG!");
         }
         
         int index = getNextFormatIndex();
         
-        // Get the original format string and replace directly
-        List<String> ggFormats = plugin.getConfig().getStringList("ggwave.gg-formats");
-        if (ggFormats.isEmpty()) {
-            return Component.text(playerName + " » GG!");
-        }
-        
-        String format = ggFormats.get(index % ggFormats.size());
+        // Get precomputed format string and replace
+        String format = precomputedGGFormatStrings.get(index % precomputedGGFormatStrings.size());
         String finalFormat = format.replace("%player_name%", playerName);
         
         return plugin.getMiniMessage().deserialize(finalFormat);
