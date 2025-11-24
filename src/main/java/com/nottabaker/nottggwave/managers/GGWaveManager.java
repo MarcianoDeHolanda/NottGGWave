@@ -198,13 +198,17 @@ public class GGWaveManager {
         }
         
         int index = getNextFormatIndex();
-        Component template = precomputedGGFormats.get(index % precomputedGGFormats.size());
         
-        // Convert to string and replace, then deserialize with actual player name
-        String templateString = plugin.getMiniMessage().serialize(template);
-        String finalString = templateString.replace("%player_name%", playerName);
+        // Get the original format string and replace directly
+        List<String> ggFormats = plugin.getConfig().getStringList("ggwave.gg-formats");
+        if (ggFormats.isEmpty()) {
+            return Component.text(playerName + " » GG!");
+        }
         
-        return plugin.getMiniMessage().deserialize(finalString);
+        String format = ggFormats.get(index % ggFormats.size());
+        String finalFormat = format.replace("%player_name%", playerName);
+        
+        return plugin.getMiniMessage().deserialize(finalFormat);
     }
 
     public void reloadMessages() {
