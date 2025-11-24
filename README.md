@@ -266,6 +266,12 @@ Created by **nottabaker**
 
 ---
 
+## 🙏 Acknowledgments
+
+This plugin was inspired by **DrakoWave** - a GG Wave management system. NottGGWave is a complete rewrite with enhanced features, modern APIs, and additional functionality while maintaining the core concept of community GG Waves.
+
+---
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
