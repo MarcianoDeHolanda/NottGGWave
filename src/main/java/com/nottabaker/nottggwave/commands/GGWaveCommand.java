@@ -46,7 +46,8 @@ public class GGWaveCommand implements CommandExecutor, TabCompleter {
 
         if (args[0].equalsIgnoreCase("reload")) {
             plugin.reloadConfig();
-            sender.sendMessage(plugin.getMiniMessage().deserialize("<green>Configuración recargada correctamente."));
+            ggWaveManager.reloadMessages();
+            sender.sendMessage(plugin.getMiniMessage().deserialize("<green>Configuración y mensajes recargados correctamente."));
             plugin.getLogger().info("Configuración recargada por " + sender.getName());
             return true;
         }

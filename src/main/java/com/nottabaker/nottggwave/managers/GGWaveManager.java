@@ -1,12 +1,17 @@
 package com.nottabaker.nottggwave.managers;
 
 import com.nottabaker.nottggwave.NottGGWave;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.text.TextComponent;
+import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -19,12 +24,47 @@ public class GGWaveManager {
     private boolean waveActive;
     private BukkitTask waveTask;
     private int formatIndex;
+    
+    // Precomputed messages for optimization
+    private Component startMessage;
+    private Component endMessage;
+    private List<TextComponent> precomputedGGFormats;
+    private Component playerMessage;
 
     public GGWaveManager(NottGGWave plugin) {
         this.plugin = plugin;
         this.participants = new HashSet<>();
         this.waveActive = false;
         this.formatIndex = 0;
+        precomputeMessages();
+    }
+
+    private void precomputeMessages() {
+        // Precompute start message
+        String startMsg = plugin.getConfig().getString("ggwave.start-message", 
+            "<green>Empezó el GG Wave, pon GG en el chat para ganar recompensas!");
+        this.startMessage = plugin.getMiniMessage().deserialize(startMsg);
+        
+        // Precompute end message template
+        this.endMessage = plugin.getMiniMessage().deserialize(
+            "<yellow>La GG Wave ha terminado. ¡Gracias a todos los %participants% participantes!");
+        
+        // Precompute player message
+        String playerMsg = plugin.getConfig().getString("ggwave.effects.player-message", "");
+        this.playerMessage = playerMsg.isEmpty() ? null : plugin.getMiniMessage().deserialize(playerMsg);
+        
+        // Precompute GG formats
+        List<String> ggFormats = plugin.getConfig().getStringList("ggwave.gg-formats");
+        if (ggFormats.isEmpty()) {
+            ggFormats = Arrays.asList("<gradient:red:yellow><b>%player_name% » GG!</gradient>");
+        }
+        
+        this.precomputedGGFormats = new ArrayList<>();
+        for (String format : ggFormats) {
+            // Create template with placeholder
+            String template = format.replace("%player_name%", "%player_name%");
+            this.precomputedGGFormats.add((TextComponent) plugin.getMiniMessage().deserialize(template));
+        }
     }
 
     public void startWave() {
@@ -36,10 +76,8 @@ public class GGWaveManager {
         participants.clear();
         formatIndex = 0; // Resetear índice al iniciar wave
 
-        // Enviar mensaje de inicio
-        String startMessage = plugin.getConfig().getString("ggwave.start-message", 
-            "<green>Empezó el GG Wave, pon GG en el chat para ganar recompensas!");
-        Bukkit.broadcast(plugin.getMiniMessage().deserialize(startMessage));
+        // Enviar mensaje de inicio (precomputed)
+        Bukkit.broadcast(startMessage);
 
         // Reproducir sonido de inicio
         String startSound = plugin.getConfig().getString("ggwave.start-sound", "block.note_block.harp");
@@ -78,10 +116,11 @@ public class GGWaveManager {
             waveTask = null;
         }
 
-        // Enviar mensaje de fin
-        String endMessage = "<yellow>La GG Wave ha terminado. ¡Gracias a todos los " + 
-                           participants.size() + " participantes!";
-        Bukkit.broadcast(plugin.getMiniMessage().deserialize(endMessage));
+        // Enviar mensaje de fin (precomputed with dynamic participant count)
+        String endText = ((TextComponent) endMessage).content()
+            .replace("%participants%", String.valueOf(participants.size()));
+        Component finalEndMessage = Component.text(endText, endMessage.color());
+        Bukkit.broadcast(finalEndMessage);
 
         plugin.getLogger().info("GG Wave finalizada. Participantes: " + participants.size());
     }
@@ -157,6 +196,23 @@ public class GGWaveManager {
 
     public int getNextFormatIndex() {
         return formatIndex++; // Incrementar y devolver el valor actual
+    }
+
+    public Component getOptimizedGGMessage(String playerName) {
+        if (precomputedGGFormats.isEmpty()) {
+            return Component.text(playerName + " » GG!");
+        }
+        
+        int index = getNextFormatIndex();
+        TextComponent template = precomputedGGFormats.get(index % precomputedGGFormats.size());
+        
+        // Efficient replace operation
+        String content = template.content().replace("%player_name%", playerName);
+        return Component.text(content, template.color());
+    }
+
+    public void reloadMessages() {
+        precomputeMessages();
     }
 
     private Sound matchSound(String soundName) {
