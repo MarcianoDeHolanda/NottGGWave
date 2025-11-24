@@ -2,7 +2,7 @@
 
 All notable changes to NottGGWave will be documented in this file.
 
-## [1.0.1] - 2024-11-24
+## [1.0.1] - 2025-11-24
 
 ### 🐛 Fixed
 - **%player_name% placeholder**: Fixed issue where player names were not being replaced correctly
@@ -26,7 +26,7 @@ All notable changes to NottGGWave will be documented in this file.
 
 ---
 
-## [1.0.0] - 2024-11-24
+## [1.0.0] - 2025-11-24
 
 ### 🎉 Initial Release
 
