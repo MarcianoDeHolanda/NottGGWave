@@ -9,9 +9,6 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class ChatListener implements Listener {
 
     private final NottGGWave plugin;

@@ -3,7 +3,6 @@ package com.nottabaker.nottggwave.managers;
 import com.nottabaker.nottggwave.NottGGWave;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.TextComponent;
-import net.kyori.adventure.text.format.TextColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -29,7 +28,6 @@ public class GGWaveManager {
     private Component startMessage;
     private Component endMessage;
     private List<TextComponent> precomputedGGFormats;
-    private Component playerMessage;
 
     public GGWaveManager(NottGGWave plugin) {
         this.plugin = plugin;
@@ -48,10 +46,6 @@ public class GGWaveManager {
         // Precompute end message template
         this.endMessage = plugin.getMiniMessage().deserialize(
             "<yellow>La GG Wave ha terminado. ¡Gracias a todos los %participants% participantes!");
-        
-        // Precompute player message
-        String playerMsg = plugin.getConfig().getString("ggwave.effects.player-message", "");
-        this.playerMessage = playerMsg.isEmpty() ? null : plugin.getMiniMessage().deserialize(playerMsg);
         
         // Precompute GG formats
         List<String> ggFormats = plugin.getConfig().getStringList("ggwave.gg-formats");
