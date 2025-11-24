@@ -27,7 +27,7 @@ public class GGWaveManager {
     // Precomputed messages for optimization
     private Component startMessage;
     private Component endMessage;
-    private List<TextComponent> precomputedGGFormats;
+    private List<Component> precomputedGGFormats;
 
     public GGWaveManager(NottGGWave plugin) {
         this.plugin = plugin;
@@ -57,7 +57,7 @@ public class GGWaveManager {
         for (String format : ggFormats) {
             // Create template with placeholder
             String template = format.replace("%player_name%", "%player_name%");
-            this.precomputedGGFormats.add((TextComponent) plugin.getMiniMessage().deserialize(template));
+            this.precomputedGGFormats.add(plugin.getMiniMessage().deserialize(template));
         }
     }
 
@@ -198,11 +198,11 @@ public class GGWaveManager {
         }
         
         int index = getNextFormatIndex();
-        TextComponent template = precomputedGGFormats.get(index % precomputedGGFormats.size());
+        Component template = precomputedGGFormats.get(index % precomputedGGFormats.size());
         
-        // Efficient replace operation
-        String content = template.content().replace("%player_name%", playerName);
-        return Component.text(content, template.color());
+        // Use replaceText to maintain gradient formatting
+        return template.replaceText(builder -> 
+            builder.matchLiteral("%player_name%").replacement(playerName));
     }
 
     public void reloadMessages() {
